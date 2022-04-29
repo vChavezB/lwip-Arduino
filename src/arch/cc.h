@@ -79,12 +79,12 @@
  * systems, this should be defined to something less resource-consuming.
  */
 
-  //TODO: Add wrapper for serial print
+//TODO: Add wrapper for serial print
 #define LWIP_PLATFORM_ASSERT(x) do { \
                                     } \
                                 while(0)
 
-  //TODO: Add wrapper for serial print
+//TODO: Add wrapper for serial print
 #define LWIP_PLATFORM_DIAG(x) do { \
                                     } \
                                 while(0)
