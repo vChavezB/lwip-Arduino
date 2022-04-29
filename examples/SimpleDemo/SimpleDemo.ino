@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <lwIP.h>
+#include <lwIP_Arduino.h>
 
 constexpr bool static_ip = false;
 constexpr uint16_t ETHERNET_MTU = 1500;

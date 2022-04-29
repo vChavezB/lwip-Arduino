@@ -61,7 +61,7 @@
 #define X32_F "x"
 
 /** Define random number generator function of your system */
-#define LWIP_RAND random
+#define LWIP_RAND rand
 
 
 /** Define this to 1 in arch/cc.h of your port if your compiler does not provide
@@ -79,12 +79,12 @@
  * systems, this should be defined to something less resource-consuming.
  */
 
-  //TODO Add wrapper for serial print
+  //TODO: Add wrapper for serial print
 #define LWIP_PLATFORM_ASSERT(x) do { \
                                     } \
                                 while(0)
 
-  //TODO Add wrapper for serial print
+  //TODO: Add wrapper for serial print
 #define LWIP_PLATFORM_DIAG(x) do { \
                                     } \
                                 while(0)

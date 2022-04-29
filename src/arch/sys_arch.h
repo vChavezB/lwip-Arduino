@@ -1,5 +1,5 @@
 #ifndef _ARDUINO_SYS_ARCH_H
-
+#include <stdint.h>
 /*
 
 TODO: If using this Arduino lwIP port library 
