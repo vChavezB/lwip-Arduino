@@ -30,13 +30,11 @@
  * Author: Adam Dunkels <adam@sics.se>
  *
  */
-/**
-  *  Portions Copyright (c) 2020, 2021 Analog Devices, Inc.
-  */
 
 #ifndef __ARCH_CC_H__
 #define __ARCH_CC_H__
 
+#include <Arduino.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -47,22 +45,12 @@
 //#include <sys/time.h>
 #include <time.h>
 
-#ifdef PROCESSOR_LITTLE_ENDIAN
+/* 
+ Assuming Arduino boards are little endian
+ In case not, add conditional macro to change endianness for lwIP
+*/
 #define BYTE_ORDER LITTLE_ENDIAN
-#else
-#define BYTE_ORDER BIG_ENDIAN
-#endif
 
-#if 0
-typedef unsigned   char    u8_t;
-typedef signed     char    s8_t;
-typedef unsigned   short   u16_t;
-typedef signed     short   s16_t;
-typedef unsigned   int    u32_t;
-typedef signed     int    s32_t;
-typedef unsigned   long long    u64_t;
-typedef signed     long long    s64_t;
-#endif
 
 #define S16_F "d"
 #define U16_F "d"
@@ -72,16 +60,43 @@ typedef signed     long long    s64_t;
 #define X16_F "x"
 #define X32_F "x"
 
-#define LWIP_RAND rand
+/** Define random number generator function of your system */
+#define LWIP_RAND random
 
-//typedef unsigned long mem_ptr_t;
 
-#define PACK_STRUCT_FIELD(x) x
-#define PACK_STRUCT_STRUCT __attribute__((packed))
-#define PACK_STRUCT_BEGIN
-#define PACK_STRUCT_END
+/** Define this to 1 in arch/cc.h of your port if your compiler does not provide
+ * the inttypes.h header. You need to define the format strings listed in
+ * lwip/arch.h yourself in this case (X8_F, U16_F...).
+ */
+#ifndef LWIP_NO_INTTYPES_H
+#define LWIP_NO_INTTYPES_H 0
+#endif
 
-#define LWIP_PLATFORM_ASSERT(x)
-#define LWIP_PLATFORM_DIAG(x) do {  DEBUG_MESSAGE x; } while(0)//xil_printf x; } while(0)
 
-#endif /* __ARCH_CC_H__ */
+/** Platform specific diagnostic output.<br>
+ * Note the default implementation pulls in printf, which may
+ * in turn pull in a lot of standard library code. In resource-constrained
+ * systems, this should be defined to something less resource-consuming.
+ */
+
+  //TODO Add wrapper for serial print
+#define LWIP_PLATFORM_ASSERT(x) do { \
+                                    } \
+                                while(0)
+
+  //TODO Add wrapper for serial print
+#define LWIP_PLATFORM_DIAG(x) do { \
+                                    } \
+                                while(0)
+
+//Bare metal system protection for lwIP
+#ifdef NO_SYS
+#define     SYS_ARCH_DECL_PROTECT(x)
+#define     SYS_ARCH_PROTECT(x)       noInterrupts()
+#define     SYS_ARCH_UNPROTECT(x)     interrupts()
+#else
+
+#endif //NO_SYS
+
+#endif /* __ARCH_CC_H__ */ 
+
