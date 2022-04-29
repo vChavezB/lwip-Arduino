@@ -24,4 +24,6 @@ https://www.nongnu.org/lwip/2_0_x/group__sys__layer.html
 */
 #define LWIP_PROVIDE_ERRNO
 
+void sys_printf(const char *format, ...);
+
 #endif //_ARDUINO_SYS_ARCH_H

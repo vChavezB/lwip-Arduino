@@ -79,15 +79,18 @@
  * systems, this should be defined to something less resource-consuming.
  */
 
-//TODO: Add wrapper for serial print
-#define LWIP_PLATFORM_ASSERT(x) do { \
-                                    } \
-                                while(0)
+#define LWIP_PLATFORM_ASSERT(x) do	{ \
+									sys_printf("Assertion \"%s\" failed at line %d in %s\n", \
+                                     x, __LINE__, __FILE__); \
+									while(1);\
+									}while(0)
+                                
 
-//TODO: Add wrapper for serial print
-#define LWIP_PLATFORM_DIAG(x) do { \
-                                    } \
-                                while(0)
+#define LWIP_PLATFORM_DIAG(x) do{ \
+								sys_printf x;\
+								\
+								}while(0)
+                                
 
 //Bare metal system protection for lwIP
 #ifdef NO_SYS

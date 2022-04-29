@@ -160,6 +160,7 @@ static err_t netif_init(struct netif *netif)
 
 void setup()
 {
+  Serial.begin(115200);
   ip4_addr_t ip, mask , gateway;
   IP4_ADDR(&ip, 192, 168, 142, 1);
   IP4_ADDR(&mask, 255, 255, 255, 0);
