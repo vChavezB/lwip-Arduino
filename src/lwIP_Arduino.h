@@ -15,6 +15,7 @@ extern "C" {
 #include "src/include/netif/ethernet.h"
 #include "src/include/lwip/snmp.h"
 #include "src/include/lwip/pbuf.h"
+#include "src/include/lwip/etharp.h"
 #include "src/include/lwip/err.h"
 #include "src/include/lwip/timeouts.h"
 #ifdef __cplusplus
