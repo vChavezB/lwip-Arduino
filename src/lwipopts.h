@@ -680,6 +680,18 @@
  */
 #define CHECKSUM_CHECK_IP 	1
 
+/*
+   ----------------------------------------
+   ---------- Statistics options ----------
+   ----------------------------------------
+*/
+
+/**
+ * MIB2_STATS==1: Stats for SNMP MIB2.
+ */
+#if !defined MIB2_STATS
+#define MIB2_STATS                      1
+#endif
 
 /*
    ------------------------------------------------
