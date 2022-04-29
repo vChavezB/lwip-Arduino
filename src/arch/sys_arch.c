@@ -1,6 +1,7 @@
 #include "sys_arch.h"
 #include <Arduino.h>
 #include "SerialWrapper.hpp"
+#include <stdarg.h>
 
 #ifndef NOSYS
 
