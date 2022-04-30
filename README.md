@@ -23,5 +23,6 @@ Refer to the examples folder to check how you could integrate lwIP with a MAC-PH
 
 - Currently the port is intended to work with bare metal systems. I.e., the [OS Layer](https://www.nongnu.org/lwip/2_0_x/group__sys__os.html) is not implemented. The reason is that Arduino does not have an OS abstraction layer.
 - Not compatible with ESP32 core, as ESP32 already includes lwIP and will create conflicts with the headers of this library.
+- Will probably not fit in small MCUs, use something with much more SRAM and Flash such as the Arduino Due, RPI Pico.
 
 
