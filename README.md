@@ -10,7 +10,7 @@ This port allows to integrate [lwIP](https://savannah.nongnu.org/projects/lwip/)
 
 ## Port specific changes
 
-- Relative includes for source files. Arduino does not incluude an easy way to include directories in their build system.
+- Relative includes for source files. Arduino does not have an easy way to include directories in their build system.
 - Integrated Arduino SDK for implementation, to make it compatible with any Arduino board.
 - Changed extension of apps/http/fsdata.c to ".c_" and changed as well the macro in HTTPD_FSDATA_FILE. Arduino build system compiles .c and .cpp files by default. However, this file is intended to be only included by fs.c.
 
