@@ -18,6 +18,10 @@ This port allows to integrate [lwIP](https://savannah.nongnu.org/projects/lwip/)
 
 Refer to the examples folder to check how you could integrate lwIP with a MAC-PHY chip. It requires that the user already has implemented the low-level access to the MAC-PHY chip to send/recieve ethernet frames and update the link status.
 
+## Debug
+
+Debug options can be changed directly from the macros located in `src/lwip_debug_opt.h`.
+
 
 ## Notes
 
