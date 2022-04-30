@@ -39,6 +39,8 @@
 #ifndef LWIPOPTS_H_
 #define LWIPOPTS_H_
 
+#include "lwip_debug_opt.h"
+
  /*
    ------------------------------------
    -------------- NO SYS --------------

@@ -1,74 +1,86 @@
+/*
+Copyright (C) 2022 Victor Chavez
+This file is part of lwIP Arduino
+lwIP Arduino is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+IOLink Device Generator is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with IOLink Device Generator.  If not, see <https://www.gnu.org/licenses/>.
+*/
 #include <Arduino.h>
 #include <lwIP_Arduino.h>
 
 constexpr bool static_ip = false;
 constexpr uint16_t ETHERNET_MTU = 1500;
 constexpr uint32_t NetIF_Speed_BPS = 10000000;
-constexpr uint8_t MacAddr[6] = {1,2,3,4,5,6};
-constexpr unsigned MAX_FRAME_SIZE = 1518; //packet size excluding FCS
+constexpr uint8_t MacAddr[6] = {1, 2, 3, 4, 5, 6};
+constexpr unsigned MAX_FRAME_SIZE = 1518;  // packet size excluding FCS
 constexpr unsigned MIN_FRAME_SIZE = 60;
 
-/* Extra 4 bytes for FCS and 2 bytes for the frame header */
-#define MAX_FRAME_BUF_SIZE  (MAX_FRAME_SIZE + 4 + 2)
 
+unsigned constexpr MAX_RX_QUEUE = 5;
 
-#define MAX_P_QUEUE 5
-
-typedef struct _pQueue
+struct EthQueue
 {
-  uint8_t pData[MAX_P_QUEUE][MAX_FRAME_SIZE];
-  int lenData[MAX_P_QUEUE];
-  int32_t nRdQ;
-  int32_t nWrQ;
-} pQueue_t;
+  uint8_t data[MAX_RX_QUEUE][MAX_FRAME_SIZE];
+  uint16_t len[MAX_RX_QUEUE];
+  uint32_t nRead;
+  uint32_t nWrite;
+};
 
-#define MAX_PQ 1
-
-pQueue_t pQ[MAX_PQ] __attribute__((aligned(4)));
+EthQueue RXQueue __attribute__((aligned(4)));
 netif netif;
 
-void initPQueue(pQueue_t* pQ)
+void initRXQueue(EthQueue* RXQueue)
 {
-    pQ->nWrQ = 0;
-    pQ->nRdQ = 0;
+    RXQueue->nWrite = 0;
+    RXQueue->nRead = 0;
 }
 
-//Writes an ethernet frame to the buffer to be processed in the main loop
-void writePQ(pQueue_t* pQ, const uint8_t *ethFrame, const uint16_t lenEthFrame)
+//Saves RX ethernet frame to the buffer to be processed in the main loop
+void writeRXQueue(EthQueue* RXQueue, const uint8_t *ethFrame, uint16_t lenEthFrame)
 {
-    memcpy(&pQ->pData[pQ->nWrQ][0] , ethFrame, lenEthFrame);
-    pQ->lenData[pQ->nWrQ] = lenEthFrame;
-    pQ->nWrQ++;
-    pQ->nWrQ %= MAX_P_QUEUE;
-}
-
-pbuf * readPQ(pQueue_t* pQ)
-{
-    const int ehtFrmLen = pQ->lenData[pQ->nRdQ];
-    pbuf* p = pbuf_alloc(PBUF_RAW, MAX_FRAME_BUF_SIZE, PBUF_RAM);
-    memcpy(reinterpret_cast<uint8_t*>(p->payload),
-            &pQ->pData[pQ->nRdQ][0],
-            ehtFrmLen);
-    pQ->nRdQ++;
-    pQ->nRdQ %= MAX_P_QUEUE;
-    return p;
-}
-
-bool pDataAvailable(pQueue_t* pQ)
-{
-  if (pQ->nWrQ != pQ->nRdQ)
+  if(lenEthFrame > MAX_FRAME_SIZE)
   {
-    return true;
+    lenEthFrame = MAX_FRAME_SIZE;
   }
-  return false;
+  memcpy(&RXQueue->data[RXQueue->nWrite] , ethFrame, lenEthFrame);
+  RXQueue->len[RXQueue->nWrite] = lenEthFrame;
+  RXQueue->nWrite++;
+  RXQueue->nWrite %= MAX_RX_QUEUE;
 }
+
+pbuf * readRXQueue(EthQueue* RXQueue)
+{
+  if(RXQueue->nWrite != RXQueue->nRead)
+  {
+    const int ehtFrmLen = RXQueue->len[RXQueue->nRead];
+    pbuf* p = pbuf_alloc(PBUF_RAW, MAX_FRAME_SIZE, PBUF_RAM);
+    memcpy(reinterpret_cast<uint8_t*>(p->payload),
+            &RXQueue->data[RXQueue->nRead][0],
+            ehtFrmLen);
+    RXQueue->nRead++;
+    RXQueue->nRead %= MAX_RX_QUEUE;
+    return p;
+  }
+  else
+  {
+    return nullptr;
+  }
+}
+
 
 bool isUnicast(const uint8_t frame)
 {
   return (frame & 0x01) == 0;
 }
 
-//TODO Set this callback in link status IRQ of ethernet PHY
+//Set this callback in link status IRQ of ethernet PHY
 void LinkHandler(bool link_status)
 {
   if(link_status == true)
@@ -81,7 +93,7 @@ void LinkHandler(bool link_status)
   }
 }
 
-//TODO Should be call inside PHY RX Ethernet IRQ
+//Should be call inside PHY RX Ethernet IRQ
 static void EthRX_Handler(const uint8_t * ethFrame, const uint16_t lenEthFrame)
 {
   LINK_STATS_INC(link.recv);
@@ -94,7 +106,7 @@ static void EthRX_Handler(const uint8_t * ethFrame, const uint16_t lenEthFrame)
   {
     MIB2_STATS_NETIF_INC(&netif, ifinnucastpkts);
   }
-  writePQ(&pQ[0], ethFrame, lenEthFrame);
+  writeRXQueue(&RXQueue, ethFrame, lenEthFrame);
 }
 
 static err_t netif_output(struct netif *netif, struct pbuf *p)
@@ -131,8 +143,8 @@ static err_t netif_output(struct netif *netif, struct pbuf *p)
     MIB2_STATS_NETIF_INC(netif, ifoutnucastpkts);
   }
   /*
-  TODO: Send frame with PHY
-  send(buf,total_len);
+  Ethernet MAC-PHY should send frame here
+  PhyMACSend(buf,total_len);
   */
   return ERR_OK;
 }
@@ -154,7 +166,7 @@ static err_t netif_init(struct netif *netif)
   MIB2_INIT_NETIF(netif, snmp_ifType_ethernet_csmacd, NetIF_Speed_BPS);
   SMEMCPY(netif->hwaddr, &MacAddr, sizeof(netif->hwaddr));
   netif->hwaddr_len = sizeof(netif->hwaddr);
-  initPQueue(&pQ[0]);
+  initRXQueue(&RXQueue);
   return ERR_OK;
 }
 
@@ -197,17 +209,14 @@ void loop()
     sys_check_timeouts();
   }
 
-  if (pDataAvailable(&pQ[0]) == true)
+  pbuf *p = readRXQueue(&RXQueue);
+  if (p != nullptr)
   {
-    pbuf *p = readPQ(&pQ[0]);
-    if (p != nullptr)
+    if (netif.input(p, &netif) != ERR_OK)
     {
-      if (netif.input(p, &netif) != ERR_OK)
-      {
-        LWIP_DEBUGF(NETIF_DEBUG, ("IP input error\r\n"));
-        pbuf_free(p);
-        p = NULL;
-      }
+      LWIP_DEBUGF(NETIF_DEBUG, ("IP input error\r\n"));
+      pbuf_free(p);
+      p = NULL;
     }
   }
 }

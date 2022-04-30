@@ -78,7 +78,7 @@
  * in turn pull in a lot of standard library code. In resource-constrained
  * systems, this should be defined to something less resource-consuming.
  */
-
+extern void sys_printf(const char *format, ...);
 #define LWIP_PLATFORM_ASSERT(x) do	{ \
 									sys_printf("Assertion \"%s\" failed at line %d in %s\n", \
                                      x, __LINE__, __FILE__); \
@@ -88,6 +88,7 @@
 
 #define LWIP_PLATFORM_DIAG(x) do{ \
 								sys_printf x;\
+								sys_printf("\n");\
 								\
 								}while(0)
                                 
