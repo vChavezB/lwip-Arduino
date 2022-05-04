@@ -40,14 +40,14 @@
 #ifndef LWIP_HDR_ALTCP_H
 #define LWIP_HDR_ALTCP_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_ALTCP /* don't build if not configured for use in lwipopts.h */
 
-#include "tcpbase.h"
-#include "err.h"
-#include "pbuf.h"
-#include "ip_addr.h"
+#include "../lwip/tcpbase.h"
+#include "../lwip/err.h"
+#include "../lwip/pbuf.h"
+#include "../lwip/ip_addr.h"
 
 #ifdef __cplusplus
 extern "C" {

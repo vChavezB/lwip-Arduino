@@ -39,13 +39,13 @@
 #ifndef LWIP_HDR_ACD_H
 #define LWIP_HDR_ACD_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 /* don't build if not configured for use in lwipopts.h */
 #if LWIP_IPV4 && LWIP_ACD
 
-#include "netif.h"
-#include "etharp.h"
+#include "../lwip/netif.h"
+#include "../lwip/etharp.h"
 #include "prot/acd.h"
 
 #ifdef __cplusplus

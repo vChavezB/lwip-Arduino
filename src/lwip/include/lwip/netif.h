@@ -37,16 +37,16 @@
 #ifndef LWIP_HDR_NETIF_H
 #define LWIP_HDR_NETIF_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #define ENABLE_LOOPBACK (LWIP_NETIF_LOOPBACK || LWIP_HAVE_LOOPIF)
 
-#include "err.h"
+#include "../lwip/err.h"
 
-#include "ip_addr.h"
+#include "../lwip/ip_addr.h"
 
-#include "def.h"
-#include "pbuf.h"
+#include "../lwip/def.h"
+#include "../lwip/pbuf.h"
 #include "stats.h"
 
 #ifdef __cplusplus

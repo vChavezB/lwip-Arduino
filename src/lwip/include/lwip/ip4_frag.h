@@ -38,12 +38,12 @@
 #ifndef LWIP_HDR_IP4_FRAG_H
 #define LWIP_HDR_IP4_FRAG_H
 
-#include "opt.h"
-#include "err.h"
-#include "pbuf.h"
-#include "netif.h"
-#include "ip_addr.h"
-#include "ip.h"
+#include "../lwip/opt.h"
+#include "../lwip/err.h"
+#include "../lwip/pbuf.h"
+#include "../lwip/netif.h"
+#include "../lwip/ip_addr.h"
+#include "../lwip/ip.h"
 
 #if LWIP_IPV4
 

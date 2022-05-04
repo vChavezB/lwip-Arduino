@@ -49,8 +49,8 @@
 #define LWIP_HDR_DEF_H
 
 /* arch.h might define NULL already */
-#include "arch.h"
-#include "opt.h"
+#include "../lwip/arch.h"
+#include "../lwip/opt.h"
 #if LWIP_PERF
 #include "../../../arch/perf.h"
 #else /* LWIP_PERF */

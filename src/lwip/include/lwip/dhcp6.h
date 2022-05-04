@@ -40,12 +40,12 @@
 #ifndef LWIP_HDR_IP6_DHCP6_H
 #define LWIP_HDR_IP6_DHCP6_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_IPV6_DHCP6  /* don't build if not configured for use in lwipopts.h */
 
-#include "err.h"
-#include "netif.h"
+#include "../lwip/err.h"
+#include "../lwip/netif.h"
 
 #ifdef __cplusplus
 extern "C" {

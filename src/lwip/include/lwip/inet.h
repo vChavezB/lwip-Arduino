@@ -40,15 +40,15 @@
 #ifndef LWIP_HDR_INET_H
 #define LWIP_HDR_INET_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_SOCKET_EXTERNAL_HEADERS
 #include LWIP_SOCKET_EXTERNAL_HEADER_INET_H
 #else /* LWIP_SOCKET_EXTERNAL_HEADERS */
 
-#include "def.h"
-#include "ip_addr.h"
-#include "ip6_addr.h"
+#include "../lwip/def.h"
+#include "../lwip/ip_addr.h"
+#include "../lwip/ip6_addr.h"
 
 #ifdef __cplusplus
 extern "C" {

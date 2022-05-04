@@ -38,10 +38,10 @@
 #ifndef LWIP_HDR_TIMEOUTS_H
 #define LWIP_HDR_TIMEOUTS_H
 
-#include "opt.h"
-#include "err.h"
+#include "../lwip/opt.h"
+#include "../lwip/err.h"
 #if !NO_SYS
-#include "sys.h"
+#include "../lwip/sys.h"
 #endif
 
 #ifdef __cplusplus

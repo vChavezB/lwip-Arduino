@@ -37,11 +37,11 @@
 #ifndef LWIP_HDR_IP_ADDR_H
 #define LWIP_HDR_IP_ADDR_H
 
-#include "opt.h"
-#include "def.h"
+#include "../lwip/opt.h"
+#include "../lwip/def.h"
 
-#include "ip4_addr.h"
-#include "ip6_addr.h"
+#include "../lwip/ip4_addr.h"
+#include "../lwip/ip6_addr.h"
 
 #ifdef __cplusplus
 extern "C" {

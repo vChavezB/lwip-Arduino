@@ -37,13 +37,13 @@
 #ifndef LWIP_HDR_TCPIP_H
 #define LWIP_HDR_TCPIP_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if !NO_SYS /* don't build if not configured for use in lwipopts.h */
 
-#include "err.h"
-#include "timeouts.h"
-#include "netif.h"
+#include "../lwip/err.h"
+#include "../lwip/timeouts.h"
+#include "../lwip/netif.h"
 
 #ifdef __cplusplus
 extern "C" {

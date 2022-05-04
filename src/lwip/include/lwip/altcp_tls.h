@@ -43,13 +43,13 @@
 #ifndef LWIP_HDR_ALTCP_TLS_H
 #define LWIP_HDR_ALTCP_TLS_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_ALTCP /* don't build if not configured for use in lwipopts.h */
 
 #if LWIP_ALTCP_TLS
 
-#include "altcp.h"
+#include "../lwip/altcp.h"
 
 /* check if mbedtls port is enabled */
 #include "apps/altcp_tls_mbedtls_opts.h"

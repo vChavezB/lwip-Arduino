@@ -38,15 +38,15 @@
 #ifndef LWIP_HDR_DHCP_H
 #define LWIP_HDR_DHCP_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_DHCP /* don't build if not configured for use in lwipopts.h */
 
-#include "netif.h"
+#include "../lwip/netif.h"
 #include "udp.h"
 
 #if LWIP_DHCP_DOES_ACD_CHECK
-#include "acd.h"
+#include "../lwip/acd.h"
 #endif /* LWIP_DHCP_DOES_ACD_CHECK */
 
 #ifdef __cplusplus

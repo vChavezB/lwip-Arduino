@@ -34,13 +34,13 @@
 #ifndef LWIP_HDR_NETDB_H
 #define LWIP_HDR_NETDB_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_DNS && LWIP_SOCKET
 
-#include "arch.h"
-#include "inet.h"
-#include "sockets.h"
+#include "../lwip/arch.h"
+#include "../lwip/inet.h"
+#include "../lwip/sockets.h"
 
 #ifdef __cplusplus
 extern "C" {

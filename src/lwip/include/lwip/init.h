@@ -37,7 +37,7 @@
 #ifndef LWIP_HDR_INIT_H
 #define LWIP_HDR_INIT_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -39,11 +39,11 @@
 #ifndef LWIP_HDR_IF_H
 #define LWIP_HDR_IF_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_SOCKET /* don't build if not configured for use in lwipopts.h */
 
-#include "netif.h"
+#include "../lwip/netif.h"
 
 #ifdef __cplusplus
 extern "C" {

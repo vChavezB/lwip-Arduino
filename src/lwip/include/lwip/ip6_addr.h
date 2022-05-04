@@ -42,8 +42,8 @@
 #ifndef LWIP_HDR_IP6_ADDR_H
 #define LWIP_HDR_IP6_ADDR_H
 
-#include "opt.h"
-#include "def.h"
+#include "../lwip/opt.h"
+#include "../lwip/def.h"
 
 #if LWIP_IPV6  /* don't build if not configured for use in lwipopts.h */
 

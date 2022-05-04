@@ -37,8 +37,8 @@
 #ifndef LWIP_HDR_IP4_ADDR_H
 #define LWIP_HDR_IP4_ADDR_H
 
-#include "opt.h"
-#include "def.h"
+#include "../lwip/opt.h"
+#include "../lwip/def.h"
 
 #if LWIP_IPV4
 

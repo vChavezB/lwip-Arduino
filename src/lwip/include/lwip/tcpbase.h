@@ -38,7 +38,7 @@
 #ifndef LWIP_HDR_TCPBASE_H
 #define LWIP_HDR_TCPBASE_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_TCP /* don't build if not configured for use in lwipopts.h */
 

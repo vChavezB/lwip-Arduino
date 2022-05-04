@@ -38,15 +38,15 @@
 #ifndef LWIP_HDR_RAW_H
 #define LWIP_HDR_RAW_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_RAW /* don't build if not configured for use in lwipopts.h */
 
-#include "pbuf.h"
-#include "def.h"
-#include "ip.h"
-#include "ip_addr.h"
-#include "ip6_addr.h"
+#include "../lwip/pbuf.h"
+#include "../lwip/def.h"
+#include "../lwip/ip.h"
+#include "../lwip/ip_addr.h"
+#include "../lwip/ip6_addr.h"
 
 #ifdef __cplusplus
 extern "C" {

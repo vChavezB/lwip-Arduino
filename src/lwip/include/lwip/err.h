@@ -36,8 +36,8 @@
 #ifndef LWIP_HDR_ERR_H
 #define LWIP_HDR_ERR_H
 
-#include "opt.h"
-#include "arch.h"
+#include "../lwip/opt.h"
+#include "../lwip/arch.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -41,11 +41,11 @@
 #ifndef LWIP_HDR_IP6_FRAG_H
 #define LWIP_HDR_IP6_FRAG_H
 
-#include "opt.h"
-#include "pbuf.h"
-#include "ip6_addr.h"
-#include "ip6.h"
-#include "netif.h"
+#include "../lwip/opt.h"
+#include "../lwip/pbuf.h"
+#include "../lwip/ip6_addr.h"
+#include "../lwip/ip6.h"
+#include "../lwip/netif.h"
 
 #ifdef __cplusplus
 extern "C" {

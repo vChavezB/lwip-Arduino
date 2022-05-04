@@ -38,15 +38,15 @@
 #ifndef LWIP_HDR_UDP_H
 #define LWIP_HDR_UDP_H
 
-#include "opt.h"
+#include "../lwip/opt.h"
 
 #if LWIP_UDP /* don't build if not configured for use in lwipopts.h */
 
-#include "pbuf.h"
-#include "netif.h"
-#include "ip_addr.h"
-#include "ip.h"
-#include "ip6_addr.h"
+#include "../lwip/pbuf.h"
+#include "../lwip/netif.h"
+#include "../lwip/ip_addr.h"
+#include "../lwip/ip.h"
+#include "../lwip/ip6_addr.h"
 #include "prot/udp.h"
 
 #ifdef __cplusplus
